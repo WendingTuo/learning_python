@@ -4,6 +4,7 @@ import os
 # Variables
 matches = []
 
+# * This section gets all the files from the current working directory that match our desired filetypes (spreadsheets)
 # Gets the current working directory
 cwd = os.getcwd()
 # Define the file types we're looking for
@@ -17,7 +18,7 @@ for root, dirs, files in os.walk(cwd):
             # Add the matches to our matches list
             matches.append(os.path.join(root, file))
 
-# Now print that as a numbered list
+# * This function displays the numbered list to the user, requests a number back, throws an error if the number is bad, and returns the selection's file location
 def selectFromResults():
     print("Select a file from the list below: ")
     for i, file in enumerate(matches, 1):
