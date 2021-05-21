@@ -15,7 +15,7 @@ for root, dirs, files in os.walk(cwd):
             # Print the list of matching files
             print(file)
 
-#print(options)
+print(options)
 
 # Build the selection list
 # def selectFromResults(options, name):
