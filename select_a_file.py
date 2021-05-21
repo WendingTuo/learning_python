@@ -1,8 +1,9 @@
+# Modules
 import os
 
+# Variables
 matches = []
-index = 0
-indexValidList = []
+matchesDict = {}
 
 # Gets the current working directory
 cwd = os.getcwd()
@@ -21,20 +22,23 @@ for root, dirs, files in os.walk(cwd):
 for i in (matches):
     print(i)
 
-# print(options)
+# Build the matches into a dictionary
+for i in [matches]:
+    matchesDict[file] = (matches)
 
-# # ! Build the selection list
-# def selectFromResults(options, name):
+# # * Build the selection list function and set starting variables
+# def selectFromResults(matches, name):
 #     index = 0
 #     indexValidList = []
 #     print('Select a ' + name + ': ')
-#     for optionName in options:
+# # * For each entry in the matches list, append an index value and insert into a dictionary
+#     for optionName in matchesDict:
 #         index = index + 1
-#         indexValidList.extend([options[optionName]])
-#         print(str(index) + ': ')
+#         indexValidList.extend([matchesDict[optionName]])
+#         print(str(index) + ') ' + optionName)
 #     inputValid = False
 #     while not inputValid:
-#         inputRaw = input(name = ': ')
+#         inputRaw = input(name + ': ')
 #         inputNo = int(inputRaw) - 1
 #         if inputNo > -1 and inputNo < len(indexValidList):
 #             selected = indexValidList[inputNo]
@@ -45,4 +49,4 @@ for i in (matches):
 #             print('Please select a valid ' + name +' number')
 #     return selected
 
-# option = selectFromResults(options, 'option')
+# option = selectFromResults(matches, 'file')
