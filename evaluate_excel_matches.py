@@ -10,18 +10,22 @@ def selectFromResults(type, results, source):
     print('Select a ' + type + ' from the list below:')
     for i, results in enumerate(source, 1):
         print(i, ') ' + results)
-    # Now request input from the user #TODO: Add an autoselect function if only 1 result (and notify auto-select occurred)
-    inputValid = False
-    while not inputValid:
-        inputRaw = input()
-        inputNo = int(inputRaw) - 1
-        if inputNo > -1 and inputNo < len(source):
-            selected = source[inputNo]
-            print('Selected ' + type + ': ' + selected)
-            inputValid = True
-            break
-        else:
-            print('Please enter a valid file number')
+    # Added an autoselect function if only 1 result and notify auto-select occurred
+    if len(source) > 1:
+        inputValid = False
+        while not inputValid:
+            inputRaw = input()
+            inputNo = int(inputRaw) - 1
+            if inputNo > -1 and inputNo < len(source):
+                selected = source[inputNo]
+                print('Selected ' + type + ': ' + selected)
+                inputValid = True
+                break
+            else:
+                print('Please enter a valid file number')
+    else:
+        selected = results
+        print('Auto-selected only available ' + type + ': ' + selected)
     return selected
 
 # * This section gets all the files from the current working directory that match our desired filetypes (spreadsheets)
@@ -45,7 +49,7 @@ targetFile = selectFromResults('file', file, matches)
 
 # * This section will will display the contents of the selected workbook and ask for instructions on which sheet to process
 wb = openpyxl.load_workbook(targetFile)
-sheets = wb.get_sheet_names()
+sheets = wb.sheetnames
 targetSheet = selectFromResults('sheet', sheets, sheets)
-sheet = wb.get_sheet_by_name(targetSheet)
+sheet = wb[targetSheet]
 print(sheet['A1'].value)
