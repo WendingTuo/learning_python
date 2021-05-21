@@ -6,5 +6,3 @@ I'm starting out with a program that can:
 1.) Search a directory for certain filetypes (spreadsheets)  
 2.) Prompt the user to select a specific file from the list  
 3.) Load that selection into openpyxl to allow for manipulation  
-
-Testing updates
