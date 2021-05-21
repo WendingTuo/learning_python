@@ -43,7 +43,9 @@ for root, dirs, files in os.walk(cwd):
 #* Call the function to establish which Excel file you want to run evaulation on
 targetFile = selectFromResults('file', file, matches)
 
-# * This section will will display the contents of the workbook and ask for instructions on which sheet to process
+# * This section will will display the contents of the selected workbook and ask for instructions on which sheet to process
 wb = openpyxl.load_workbook(targetFile)
 sheets = wb.get_sheet_names()
 targetSheet = selectFromResults('sheet', sheets, sheets)
+sheet = wb.get_sheet_by_name(targetSheet)
+print(sheet['A1'].value)
