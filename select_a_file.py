@@ -1,6 +1,8 @@
 import os
 
-options = {}
+matches = []
+index = 0
+indexValidList = []
 
 # Gets the current working directory
 cwd = os.getcwd()
@@ -12,12 +14,16 @@ for root, dirs, files in os.walk(cwd):
     for file in files:
         # Check the extension of the file against our list of extensions
         if file.endswith(fileTypes):
-            # Print the list of matching files
-            print(file)
+            # Add the matches to our matches list
+            matches.append(os.path.join(root, file))
 
-print(options)
+# Now print that list to check
+for i in (matches):
+    print(i)
 
-# Build the selection list
+# print(options)
+
+# # ! Build the selection list
 # def selectFromResults(options, name):
 #     index = 0
 #     indexValidList = []
