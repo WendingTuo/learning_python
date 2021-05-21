@@ -3,7 +3,6 @@ import os
 
 # Variables
 matches = []
-matchesDict = {}
 
 # Gets the current working directory
 cwd = os.getcwd()
@@ -18,35 +17,23 @@ for root, dirs, files in os.walk(cwd):
             # Add the matches to our matches list
             matches.append(os.path.join(root, file))
 
-# Now print that list to check
-for i in (matches):
-    print(i)
+# Now print that as a numbered list
+def selectFromResults():
+    print("Select a file from the list below: ")
+    for i, file in enumerate(matches, 1):
+        print(i, ') ' + file)
+    # Now request input from the user
+    inputValid = False
+    while not inputValid:
+        inputRaw = input()
+        inputNo = int(inputRaw) - 1
+        if inputNo > -1 and inputNo < len(matches):
+            selected = matches[inputNo]
+            print('Selected file: ' + selected)
+            inputValid = True
+            break
+        else:
+            print('Please enter a valid file number')
+    return selected
 
-# Build the matches into a dictionary
-for i in [matches]:
-    matchesDict[file] = (matches)
-
-# # * Build the selection list function and set starting variables
-# def selectFromResults(matches, name):
-#     index = 0
-#     indexValidList = []
-#     print('Select a ' + name + ': ')
-# # * For each entry in the matches list, append an index value and insert into a dictionary
-#     for optionName in matchesDict:
-#         index = index + 1
-#         indexValidList.extend([matchesDict[optionName]])
-#         print(str(index) + ') ' + optionName)
-#     inputValid = False
-#     while not inputValid:
-#         inputRaw = input(name + ': ')
-#         inputNo = int(inputRaw) - 1
-#         if inputNo > -1 and inputNo < len(indexValidList):
-#             selected = indexValidList[inputNo]
-#             print('Selected ' + name + ': ' + selected)
-#             inputValid = True
-#             break
-#         else:
-#             print('Please select a valid ' + name +' number')
-#     return selected
-
-# option = selectFromResults(matches, 'file')
+selectFromResults()
