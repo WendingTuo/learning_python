@@ -11,6 +11,7 @@ def selectFromResults(type, results, source):
     for i, results in enumerate(source, 1):
         print(i, ') ' + results)
     # Added an autoselect function if only 1 result and notify auto-select occurred
+    #TODO: Add error handling if there are no results?
     if len(source) > 1:
         inputValid = False
         while not inputValid:
@@ -28,7 +29,7 @@ def selectFromResults(type, results, source):
         print('Auto-selected only available ' + type + ': ' + selected)
     return selected
 
-# * This section gets all the files from the current working directory that match our desired filetypes (spreadsheets)
+#* This section gets all the files from the current working directory that match our desired filetypes (spreadsheets)
 # Variables
 matches = []
 # Gets the current working directory
@@ -47,9 +48,8 @@ for root, dirs, files in os.walk(cwd):
 #* Call the function to establish which Excel file you want to run evaulation on
 targetFile = selectFromResults('file', file, matches)
 
-# * This section will will display the contents of the selected workbook and ask for instructions on which sheet to process
+#* This section will will display the contents of the selected workbook and ask for instructions on which sheet to process
 wb = openpyxl.load_workbook(targetFile)
 sheets = wb.sheetnames
 targetSheet = selectFromResults('sheet', sheets, sheets)
 sheet = wb[targetSheet]
-print(sheet['A1'].value)
